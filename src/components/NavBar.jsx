@@ -1,42 +1,45 @@
 import React, { Fragment } from "react";
-import logo from'../logoHblanco.png'
+import LogoTipo from'../assets/logoTipo.png'
+
+import CartWidget from "./CartWidget";
+
+import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NavBar = () => {
-
-    const NavStyle = {
-        display:"flex",
-        height:110,
-        paddingTop:10,
-        paddingLeft:30,
-        backgroundColor: "Black",
-        alingItems:"center",
-        
-    }    
-    const List = {
-        display: "flex",
-        paddingLeft: 20,
-        listStyleType: "none",
-        alingItems:"center",
-        justifyContent:"center",
+    const LogoStyle = {
+        height: 90,
     }
-    const Link= {
-        textDecoration:"none",
-        paddingLeft:15,
-        color:"white",
+    const NavBg ={
+        backgroundColor: "#d1bdc4"
     }
-
 
     return(
         <Fragment>
-            <div style={NavStyle}>
-                <a href="#"><img src={logo} alt="Logo" /></a>
-                <ul style={List}>
-                    <li><a href="#" style={Link}>Home</a></li>
-                    <li><a href="#" style={Link}>Productos </a></li>
-                    <li><a href="#" style={Link}>Contacto</a></li>
-                </ul>
+            <div>
+                <Navbar style={NavBg} expand="lg" sticky-top>
+                    <Container>
+                        <Navbar.Brand href="#home"><img src={LogoTipo} alt="" style={LogoStyle}/></Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+                                <Nav.Link href="#home">Home</Nav.Link>
+                                <Nav.Link href="#link">Contacto</Nav.Link>
+                                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="#action/3.1">Productos</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2">Facial</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2">Corporal</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.3">Cabello</NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
+
+                        <CartWidget/>
+                    </Container>
+                </Navbar> 
 
             </div>
+            
         </Fragment>
     )
 }
