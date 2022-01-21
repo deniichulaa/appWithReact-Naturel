@@ -17,7 +17,7 @@ const NavBar = () => {
     return(
         <Fragment>
             <div>
-                <Navbar style={NavBg} expand="lg" sticky-top>
+                <Navbar style={NavBg} expand="lg">
                     <Container>
                         <Navbar.Brand href="#home"><img src={LogoTipo} alt="" style={LogoStyle}/></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
