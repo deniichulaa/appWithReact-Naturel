@@ -6,7 +6,7 @@ import shampoo from "../assets/shampoo.jpeg"
 
 const ItemListContainer = () => {
 
-    const [Products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
     const data = [
         {id: "f001", name: "Limpiador Facial", price: 500, img: {limpFacial}, stock: 10},
@@ -23,12 +23,12 @@ const ItemListContainer = () => {
         });
     },[]);
 
-    console.log("itemContainer", Products)
+    console.log("itemContainer", products)
     return(
         
         <div>
             
-            <ItemList productItemlist={Products}/>
+            <ItemList productItemlist={products}/>
 
         </div>
         

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ItemCount = (stock) => {
 
-    const [Qty, setQty] = useState(0);
+    const [qty, setQty] = useState(0);
     
 
     const SpanStyle = {
@@ -13,13 +13,13 @@ const ItemCount = (stock) => {
         fontSize:20
     }
     const plusOne = () => {
-        if (Qty < {stock}) {
-            setQty(Qty + 1)
+        if (qty < {stock}) {
+            setQty(qty + 1)
         }
     }
     const lessOne = () => {
-        if (Qty > 0) {
-            setQty(Qty - 1)
+        if (qty > 0) {
+            setQty(qty - 1)
         }
     }
 
@@ -27,7 +27,7 @@ const ItemCount = (stock) => {
         <div>
             
             <Button variant="outline-secondary" onClick={lessOne}>-</Button>{' '}
-            <span style={SpanStyle}>{Qty}</span>
+            <span style={SpanStyle}>{qty}</span>
             <Button variant="outline-secondary" onClick={plusOne}>+</Button>{' '}
             
             
