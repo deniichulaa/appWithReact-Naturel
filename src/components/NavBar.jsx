@@ -6,6 +6,8 @@ import CartWidget from "./CartWidget";
 import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import {Link} from "react-router-dom";
+
 const NavBar = () => {
     const LogoStyle = {
         height: 90,
@@ -19,7 +21,7 @@ const NavBar = () => {
             <div>
                 <Navbar style={NavBg} expand="lg">
                     <Container>
-                        <Navbar.Brand href="#home"><img src={LogoTipo} alt="" style={LogoStyle}/></Navbar.Brand>
+                        <Link to={"/"}><Navbar.Brand href="#home"><img src={LogoTipo} alt="" style={LogoStyle}/></Navbar.Brand></Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
