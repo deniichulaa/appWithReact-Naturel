@@ -1,4 +1,4 @@
-
+import { Container } from 'react-bootstrap';
 
 import ItemListContainer from './ItemListContainer';
 import ItemDetailContainer from './ItemDetailContainer';
@@ -6,13 +6,13 @@ import ItemDetailContainer from './ItemDetailContainer';
 
 function Home() {
   return (
-    <div>
+    <Container >
       
       <ItemListContainer/>
 
       <ItemDetailContainer/>
 
-    </div>
+    </Container>
   );
 }
 

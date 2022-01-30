@@ -1,32 +1,34 @@
-import React from "react";
+
 import Item from "./Item";
 
-const ItemList = (prodItemlist) => {
+const ItemList = ({productsItemList}) => {
 
-   console.log("en el itemlist", prodItemlist)
+   console.log("en el itemlist", productsItemList)
+   console.log("🚀 ~ file: ItemList.jsx ~ line 7 ~ ItemList ~ productsItemList", productsItemList)
    // product es un objeto y adentro tiene el array de objetos 
 
-    let ProductArray = prodItemlist.productItemlist
+    let ProductArray = productsItemList.productItemlist
     console.log("🚀 ~ file: ItemList.jsx ~ line 10 ~ ItemList ~ ProductArray", ProductArray)
 
-    let [productList, prototype] = ProductArray
-    console.log("🚀 ~ file: ItemList.jsx ~ line 13 ~ ItemList ~ productList", productList)
-
+    const container = {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "spaceAround",
+        alingItems: "center",
+        marginTop: 40
+    }
+    
     return(
 
-        <div>
-            <p>555</p>
-            <div>
-                {/* {productList.map((prod) => {
-                    return(<div key={prod.id}>
-                        <Item img={prod.img} name={prod.name} price={prod.price} stock={prod.stock}/>
-                    </div>)
-            })}   */}
-            </div>
+        <div style={container}>
             
-
-            <p>asdfas</p>
-
+            {ProductArray.map((prod) => (
+                <div key={prod.id}>
+                    <Item key={prod.id} product={prod}/>
+                </div>
+            ))}  
+            
         </div> 
     ) 
 }
