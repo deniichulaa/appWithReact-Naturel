@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import  { Fragment } from "react";
 import LogoTipo from'../assets/logoTipo.png'
 
 import CartWidget from "./CartWidget";
@@ -25,11 +25,11 @@ const NavBar = () => {
                     <Link to={"/"}><Navbar.Brand href="#home"><img src={LogoTipo} alt="" style={LogoStyle}/></Navbar.Brand></Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="me-auto" style={{fontFamily:"georgia"}}>
                             <Nav.Link as={NavLink} to="/" >Inicio</Nav.Link>
                             <Nav.Link as={NavLink} to="/contact" >Contacto</Nav.Link>
                             <NavDropdown title="Categoría" id="basic-nav-dropdown">
-                                <NavDropdown.Item > <Link to="/category/face">Facial</Link> </NavDropdown.Item>
+                                <NavDropdown.Item as={NavLink} to="/natural">Cosmética Natural</NavDropdown.Item>
                                 <NavDropdown.Item > <Link to="/category/body">Corporal</Link> </NavDropdown.Item>
                                 <NavDropdown.Item > <Link to="/category/hair">Capilar</Link> </NavDropdown.Item>
                             </NavDropdown>

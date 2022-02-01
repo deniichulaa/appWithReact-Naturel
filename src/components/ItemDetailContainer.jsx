@@ -1,38 +1,46 @@
-import {useEffect, useState} from "react";
-import react from "react";
+
 import ItemDetail from "./ItemDetail";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+
+import { Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ItemDetailContainer = () => {
+    const {id} = useParams();
 
-    const [apiProducts, setApiProducts] = useState([])
-
-    const meliProducts = (category) => {
-        return fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${category}`)
-        .then(data => data.json())
+    const productDetail = (id) => {
+        return fetch(`https://api.mercadolibre.com/items/${id}`)
+            .then(data => data.json())
+    }
+    
+    const productDescription = (id) => {
+        return fetch(`https://api.mercadolibre.com/items/${id}/description`)
+            .then(data => data.json())
     }
 
+    const [product, setProduct] = useState(null)
     useEffect(() => {
         let mounted = true
-        meliProducts("MLA1246").then(item => {
+        Promise.all([productDetail(id), productDescription(id)]).then(results => {
+            let item = results[0] 
+            item.description = results[1].plain_text
+
             if(mounted){
-                setApiProducts(item.results)
+                setProduct(item)
             }
         })
-        return () => mounted = false
-    }, [])
+        return () => mounted=false
+    }, [id]);
 
-    console.log(apiProducts)
+   
 
     return(
-        <div>
-            <h1>mi item</h1>
-            <div>
-                {apiProducts.map(prod => {
-                    if(prod.id == "MLA1118603224"){
-                    return <ItemDetail name={prod.title} img={prod.thumbnail} ubi={prod.address.city_name} price={prod.price}/> }
-                })}
-            </div>
-        </div>
+        <>
+            <Container style={{marginTop:50}}>
+                {product ? <ItemDetail product={product} /> : null}
+            </Container>
+        </>
     )
 
 }

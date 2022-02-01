@@ -1,42 +1,46 @@
 /* import react from "react"; */
 import { Button, Card, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ItemCount from "./ItemCount";
+
+import { useNavigate } from 'react-router-dom';
 
 const Item = ({product}) => {
 
-    console.log("en item ", product)
-    const {id, category, name, price,img, stock} = product
-    //console.log("🚀 ~ file: Item.jsx ~ line 10 ~ Item ~ img", img)
+    //console.log("en item ", product);
+    const {id, title, thumbnail, price } = product;
+    
 
     const cardContainer = {
-        marginRight: 30
+        marginRight: 20, 
+        marginLeft: 20,
+        marginBottom: 50,
+        width: '15rem',
     }
 
-    const cardDesc= {
-        textAling: "center",
+    const navigate = useNavigate()
+    const details = () => {
+        navigate(`/product/${id}`)
     }
-
+   
     return (
 
-        <>
-            <div Id={id}>
+    
+        <div Id={id} style={cardContainer}>
 
-                <Card style={{ width: '18rem' }} style={cardContainer} >
-                    <Card.Img variant="top" src={img} />
-                    <Card.Body style={cardDesc}> 
-                        <Card.Title>{name}</Card.Title>
-                        <Card.Text>
-                            {price}
-                        </Card.Text>
-                        <ItemCount stock={stock}/>
-                        <Button variant="outline-secondary">Ver Detalle</Button>
-                    </Card.Body>
-                </Card>
-            </div>
-            
+            <Card>
+                <Card.Img variant="top" src={thumbnail} />
+                <Card.Body style={{textAlign:"center", fontFamily:"georgia"}}> 
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>
+                        $ {price}
+                    </Card.Text>
+                    <Button variant="outline-secondary" onClick={() => details()}>Ver Detalle</Button>
+                </Card.Body>
+            </Card>
+        </div>
         
-        </>
+        
+       
 
 
     )
