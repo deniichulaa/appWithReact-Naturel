@@ -24,7 +24,6 @@ const Item = ({product}) => {
    
     return (
 
-    
         <div Id={id} style={cardContainer}>
 
             <Card>
@@ -39,10 +38,6 @@ const Item = ({product}) => {
             </Card>
         </div>
         
-        
-       
-
-
     )
 }
 

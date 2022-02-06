@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Loading = () => {
     return(
-        <Spinner animation="border" />
+        <Spinner animation="grow" variant="secondary" />
     )
 }
 

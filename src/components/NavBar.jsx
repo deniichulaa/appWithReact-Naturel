@@ -40,8 +40,6 @@ const NavBar = () => {
                 </Container>
             </Navbar> 
 
-            
-            
         </Fragment>
     )
 }

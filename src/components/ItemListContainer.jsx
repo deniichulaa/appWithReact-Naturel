@@ -12,7 +12,6 @@ const ItemListContainer = ({products}) => {
             <ItemList productsItemList={products}/>
 
         </div>
-        
     )
 } 
 

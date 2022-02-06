@@ -5,11 +5,12 @@ import cremaCorp from "../assets/corCrema.jpeg";
 import cremaFac from "../assets/facCrema.jpeg"; 
 
 import { useEffect, useState } from "react";
-import ItemListContainer from "./ItemListContainer";
+//import ItemListContainer from "./ItemListContainer";
 
 const Natural = () => {
 
     const [products, setProducts] = useState([]);
+    console.log("🚀 ~ file: Natural.jsx ~ line 13 ~ Natural ~ products", products)
 
     const data = [
         {id: "f001", category: "face", title: "Limpiador Facial", price: 500, thumbnail: {limpFacial}, stock: 10},
@@ -33,7 +34,8 @@ const Natural = () => {
     //console.log("en el itemContainer", products)
 
     return(
-        <ItemListContainer products={products} />
+        <h2>Proximamente: Productos de mi array</h2>
+        //<ItemListContainer products={products} />
     )
 
 }

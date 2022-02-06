@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const ItemDetail = ({product}) => {
 
-    console.log("en item detail ", product )
+    //console.log("en item detail ", product )
     const {thumbnail, title, price, seller_address , initial_quantity, description, sold_quantity} = product
 
     const ubi = seller_address.city.name
@@ -14,10 +14,7 @@ const ItemDetail = ({product}) => {
     const [butonOnAdd, setButonOnAdd] = useState(true);
     const [qty, setQty] = useState(1); //estado del contador 
 
-    const [qtyDetail, setQtyDetail] = useState(0);  //cantidad de producto para mandar al carrito
-    console.log("🚀 ~ file: ItemDetail.jsx ~ line 17 ~ ItemDetail ~ qtyDetail", qtyDetail)
-   
-   
+ 
     return(
         <>
             <Row style={{textAlign: "center"}}>
@@ -33,9 +30,8 @@ const ItemDetail = ({product}) => {
                     <p>Estamos en {ubi}</p>
                     <p>stock: {initial_quantity}</p>
 
-                    
-
-                   {butonOnAdd ? <ItemCount stock={initial_quantity} qty={qty} setQty={setQty} setQtyDetail={setQtyDetail} setButonOnAdd={setButonOnAdd}/> 
+                    {butonOnAdd ? 
+                        <ItemCount product={product} qty={qty} setQty={setQty} setButonOnAdd={setButonOnAdd}/> 
                         : ( <div>
                                 <Link to ={"/cart"}> <Button variant="secondary" >Finalizar compra</Button></Link>
                             </div>

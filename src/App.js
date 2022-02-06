@@ -9,25 +9,29 @@ import CategoryId from './components/CategoryId';
 import Natural from './components/Natural';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from "./components/Cart";
+import { CartProvider } from './context/CartContext';
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route> 
-          <Route path="/product/:id" element={<ItemDetailContainer/>} />
-          <Route path="/category/:id" element={<CategoryId/>} />
-          <Route path="/category" element={<Category/>} />
-          <Route path="/cart" element={<Cart/>} />
-          <Route path="/natural" element={<Natural/>} />
-          <Route path="/contact"  element={<Contact/>} /> 
-          <Route path="/" exact element={<Home/>} /> 
+    <CartProvider>
+      <BrowserRouter>
+        <NavBar/>
+        <Routes>
+          <Route> 
+            <Route path="/product/:id" element={<ItemDetailContainer/>} />
+            <Route path="/category/:id" element={<CategoryId/>} />
+            <Route path="/category" element={<Category/>} />
+            <Route path="/cart" element={<Cart/>} />
+            <Route path="/natural" element={<Natural/>} />
+            <Route path="/contact"  element={<Contact/>} /> 
+            <Route path="/" exact element={<Home/>} /> 
 
-        </Route>
-        
-      </Routes>
-    </BrowserRouter>
+          </Route>
+          
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 
