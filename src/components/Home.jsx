@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import {useState, useEffect} from "react";
 
 import ItemListContainer from './ItemListContainer';
+import Loading from './Loading';
 
 
 function Home() {
@@ -17,7 +18,10 @@ function Home() {
       let mounted = true
       meliProducts("MLA1246").then(item => {
           if(mounted){
-              setApiProducts(item.results)
+            setApiProducts(item.results)
+            setTimeout(() => {
+              <Loading/>
+            },3000)
           }
       })
       return () => mounted = false

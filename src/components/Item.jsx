@@ -8,35 +8,32 @@ const Item = ({product}) => {
 
     //console.log("en item ", product);
     const {id, title, thumbnail, price } = product;
-    
-
-    const cardContainer = {
-        marginRight: 20, 
-        marginLeft: 20,
-        marginBottom: 50,
-        width: '15rem',
-    }
 
     const navigate = useNavigate()
     const details = () => {
         navigate(`/product/${id}`)
     }
    
+    const cardStyle = {
+        boxShadow: "0 0 30px 0 rgba(0,0,0,.3)",
+        
+    }
+
     return (
 
-        <div Id={id} style={cardContainer}>
+        <>
 
-            <Card>
-                <Card.Img variant="top" src={thumbnail} />
+            <Card style={cardStyle}>
+                <Card.Img variant="top" src={thumbnail} style={{widht: 300}}/>
                 <Card.Body style={{textAlign:"center", fontFamily:"georgia"}}> 
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Text>
+                    <Card.Title style={{fontSize: "1.2rem"}}>{title}</Card.Title>
+                    <Card.Text style={{fontSize: "1rem"}}>
                         $ {price}
                     </Card.Text>
                     <Button variant="outline-secondary" onClick={() => details()}>Ver Detalle</Button>
                 </Card.Body>
             </Card>
-        </div>
+        </>
         
     )
 }

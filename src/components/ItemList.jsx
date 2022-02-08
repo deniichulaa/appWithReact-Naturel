@@ -2,30 +2,27 @@
 import Item from "./Item";
 
 const ItemList = ({productsItemList}) => {
-
-  
     //let ProductArray = productsItemList.productItemlist
     //console.log("🚀 ~ file: ItemList.jsx ~ line 10 ~ ItemList ~ ProductArray", ProductArray)
 
     const container = {
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "spaceAround",
-        alingItems: "center",
-        marginTop: 40,
-        width: "100%"
+        padding: "5rem 2rem",
+        margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))",
+        gap: "3rem 1rem",
     }
     
     return(
 
         <div style={container}>
             
-            {productsItemList.map((prod) => (
-                <div key={prod.id}>
-                    <Item key={prod.id} product={prod}/>
-                </div>
-            ))}  
+            { productsItemList ? 
+            (productsItemList.map((prod) => (
+                <Item key={prod.id} product={prod}/> 
+            )))
+            : null
+            }  
             
         </div> 
     ) 

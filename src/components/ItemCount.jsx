@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useContext} from "react";
 import { CartContext } from '../context/CartContext'; 
 
-const ItemCount = ({product, qty, setQty, setQtyDetail, setButonOnAdd}) => {
+const ItemCount = ({product, qty, setQty, setButonOnAdd}) => {
     const { initial_quantity} = product
     
 
