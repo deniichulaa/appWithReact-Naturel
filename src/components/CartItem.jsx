@@ -9,7 +9,7 @@ const CartItem = ({product}) => {
 
     return(
         <tr> 
-            <td><img src={img} alt="Imagen del Producto" /></td>
+            <td><img src={img} alt="Imagen del Producto" style={{height: 80}}/></td>
             <td>{name}</td>
             <td><input type="number" value={qty} onChange={() => {qtyChange(id, qty)}}/></td>
             <td>{price}</td>

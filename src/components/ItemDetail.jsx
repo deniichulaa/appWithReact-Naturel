@@ -7,10 +7,8 @@ import {Link} from "react-router-dom";
 const ItemDetail = ({product}) => {
 
     //console.log("en item detail ", product )
-    const {thumbnail, title, price, seller_address , initial_quantity, description, sold_quantity} = product
+    const {thumbnail, title, price , initial_quantity, description, sold_quantity} = product
 
-    const ubi = seller_address.city.name
-    
     const [butonOnAdd, setButonOnAdd] = useState(true);
     const [qty, setQty] = useState(1); //estado del contador 
 
@@ -27,7 +25,7 @@ const ItemDetail = ({product}) => {
                     <h2>{title}</h2>
 
                     <p style={{fontSize:30}}>$ {price}</p>
-                    <p>Estamos en {ubi}</p>
+                    <p>Estamos en Villa Ballester </p>
                     <p>stock: {initial_quantity}</p>
 
                     {butonOnAdd ? 

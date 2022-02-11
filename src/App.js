@@ -10,6 +10,7 @@ import Natural from './components/Natural';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from "./components/Cart";
 import { CartProvider } from './context/CartContext';
+import AddProduct from './components/AddProduct';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <NavBar/>
         <Routes>
           <Route> 
+            <Route path="/addproduct" element={<AddProduct/>}/>
             <Route path="/product/:id" element={<ItemDetailContainer/>} />
             <Route path="/category/:id" element={<CategoryId/>} />
             <Route path="/category" element={<Category/>} />

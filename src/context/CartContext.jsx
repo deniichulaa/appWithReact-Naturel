@@ -35,7 +35,7 @@ export const CartProvider = ({children}) => {
     // no funciona! ---------------------------------------------------
     const deleteItem = (id) => {
         console.log("🚀 ~ file: CartContext.jsx ~ line 34 ~ deleteItem ~ id", id)
-        const newItems = items.filter((prod) => { return prod.id !== id});
+        const newItems = items.filter((prod) => {console.log("eliminar item ", prod.id); return prod.id !== id});
         console.log("🚀 ~ file: CartContext.jsx ~ line 34 ~ deleteItem ~ newItems", newItems)
         setItems(newItems) 
 
