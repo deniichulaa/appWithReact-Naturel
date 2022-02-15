@@ -13,16 +13,17 @@ const ItemDetailContainer = () => {
     const {id} = useParams();
     const [product, setProduct] = useState(null)
 
-    useEffect(() => {
+   /*  useEffect(() => {
         const getFromFirebase = async () => {
             const docRef = doc(db, "items", id)
             const docSnapshot = await getDoc(docRef)
             setProduct({id: docSnapshot.id, ...docSnapshot.data()})
         }
         getFromFirebase()
-    }, []);
+    }, []); */
 
-    /* const productDetail = (id) => {
+    // ---------------------------- PRODUCTOS MELI ----------------------------------
+    const productDetail = (id) => {
         return fetch(`https://api.mercadolibre.com/items/${id}`)
             .then(data => data.json())
     }
@@ -32,7 +33,6 @@ const ItemDetailContainer = () => {
             .then(data => data.json())
     }
 
-    const [product, setProduct] = useState(null)
     useEffect(() => {
         let mounted = true
         Promise.all([productDetail(id), productDescription(id)]).then(results => {
@@ -44,7 +44,7 @@ const ItemDetailContainer = () => {
             }
         })
         return () => mounted=false
-    }, [id]); */
+    }, [id]); 
 
     return(
         <>

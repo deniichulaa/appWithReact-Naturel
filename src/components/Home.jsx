@@ -9,7 +9,12 @@ import {db} from "../firebase"
 
 function Home() {
 
-  const [prodList, setProdList] = useState([])
+  const [prodArray, setProdArray] = useState([])
+  const [prodList, setProdList] = useState()
+
+  const setproducts = () =>{
+    setProdList(prodArray)
+  }
 
   useEffect(() => {
     const getFromFirebase = async () => {
@@ -19,30 +24,40 @@ function Home() {
       const snapshot = await getDocs(query)
 
       snapshot.forEach((doc) => {
-        //el id esta en otro lado y los datos se obtienen con data(). no funciona con map()
-        //console.log("el id es ", doc.id)
-        //console.log(doc.data())
+        //el id esta fuera del objeto y los datos se obtienen con data(). no funciona con map()
 
         const prodId = doc.id;
-
-        const isinList = prodList.every(item => {
-          console.log("en el home " , item.id)
-          return item.id !== prodId;
+        console.log("🚀 ~ file: Home.jsx ~ line 30 ~ snapshot.forEach ~ prodId", prodId)
+        
+        
+        prodArray.forEach(item => {
+          console.log("en el foreach " , item.id)
+          if(prodId === item.id){
+            return null
+          }
         })
-
-        if(isinList){
-          setProdList([...prodList, {id: prodId, ...doc.data()}]) 
+        const {category, description, initial_quantity, price, sold_quantity, thumbnail, title} =  doc.data()
+        const product = {
+          id: prodId,
+          category:category,
+          description: description,
+          initial_quantity: initial_quantity, 
+          price: price,
+          sold_quantity:sold_quantity,
+          thumbnail:thumbnail, 
+          title:title
         }
-        else{return null}
+        setProdArray([...prodArray, product]) 
+        console.log("ingreso un producto?")
         
       })
     }
+    
     getFromFirebase()
+    setproducts()
   }, []); 
-
-  console.log("en el array de productos",prodList)
-  
-  
+console.log("array de productos", prodArray)
+  console.log("array a renderizar", prodList)
 
   return (
     <Container >
@@ -56,7 +71,7 @@ function Home() {
 
 export default Home;
 
-// -------------------------------- API DE MERCADOLIBRE ------------------------------
+// -------------------------------------------------------------
 //para traer algo en especifico a partir de los filtros
   /* useEffect(() => {
     
@@ -74,24 +89,4 @@ export default Home;
     getFromFirebase()
   }, []); */
 
-  /* const [apiProducts, setApiProducts] = useState([])
-
-  const meliProducts = (category) => {
-      return fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${category}`)
-      .then(data => data.json())
-  }
-
-  useEffect(() => {
-      let mounted = true
-      meliProducts("MLA1246").then(item => {
-          if(mounted){
-            setApiProducts(item.results)
-            setTimeout(() => {
-              <Loading/>
-            },3000)
-          }
-      })
-      return () => mounted = false
-  }, []) */
-
-  //console.log(apiProducts)
+ 

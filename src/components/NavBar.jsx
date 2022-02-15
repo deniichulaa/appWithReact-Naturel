@@ -29,7 +29,7 @@ const NavBar = () => {
                             <Nav.Link as={NavLink} to="/" >Inicio</Nav.Link>
                             <Nav.Link as={NavLink} to="/contact" >Contacto</Nav.Link>
                             <NavDropdown title="Categoría" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={NavLink} to="/natural">Cosmética Natural</NavDropdown.Item>
+                                <NavDropdown.Item as={NavLink} to="/meli">Cuidado Personal</NavDropdown.Item>
                                 <NavDropdown.Item > <Link to="/category/body">Corporal</Link> </NavDropdown.Item>
                                 <NavDropdown.Item > <Link to="/category/hair">Capilar</Link> </NavDropdown.Item>
                             </NavDropdown>

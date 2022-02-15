@@ -2,25 +2,13 @@ import { useState } from "react"
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import {collection, addDoc} from "firebase/firestore"
 import { db } from "../firebase";
-import {getStorage, ref, uploadBytes} from "firebase/storage";
+import {getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
 
 const AddProduct = () => {
     const [image, setImage] = useState('');
 
     const onSubmit = (event) => {
         event.preventDefault();
-        
-        if(typeof image !== 'undefined'){
-            console.log("imafgen",image);
-            const imgid= image.lasModified;
-            const storage = getStorage();
-            const storageRef = ref(storage, `items/${imgid}`);
-
-            uploadBytes(storageRef, image).then(snapshot => {
-                console.log("archivo subido ", snapshot)
-            }) 
-        }
-        //const thumbnail = image;
         const title = event.target.elements.title.value;
         const description = event.target.elements.description.value;
         const initial_quantity = event.target.elements.initial_quantity.value;
@@ -32,15 +20,24 @@ const AddProduct = () => {
     }
 
     const addtoFirebase = async(title, description, initial_quantity, price, sold_quantity, category) => {
-        
-        addDoc(collection(db, "items"),{
+        let imageUrl = ""
+        if(typeof image !== 'undefined'){
+            const storage = getStorage();
+            const imageName = (+new Date).toString(36);
+            const storageRef = ref(storage, `items/${imageName}`);
+
+            const uploadTask = await uploadBytes(storageRef, image)
+            imageUrl = await getDownloadURL(uploadTask.ref)
+        }
+
+        addDoc( collection(db, "items"),{
             title: title,
             description: description,
             initial_quantity: initial_quantity,
             price: price,
             sold_quantity: sold_quantity,
             category: category,
-            //thumbnail: thumbnail
+            thumbnail: imageUrl
         }).then(doc => {
             console.log("se creo el docu con el id ", doc.id)
         }).catch(err => {

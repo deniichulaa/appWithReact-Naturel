@@ -32,15 +32,12 @@ export const CartProvider = ({children}) => {
         console.log("cambio valor")
     }
 
-    // no funciona! ---------------------------------------------------
     const deleteItem = (id) => {
-        console.log("🚀 ~ file: CartContext.jsx ~ line 34 ~ deleteItem ~ id", id)
-        const newItems = items.filter((prod) => {console.log("eliminar item ", prod.id); return prod.id !== id});
-        console.log("🚀 ~ file: CartContext.jsx ~ line 34 ~ deleteItem ~ newItems", newItems)
+        const propId = id.id;
+        const newItems = items.filter((prod) => {return prod.id !== propId});
         setItems(newItems) 
 
     }
-    // --------------------------------------------------------------------
 
     useEffect(() => {
         const getTotal = () => {
@@ -51,6 +48,16 @@ export const CartProvider = ({children}) => {
         }
         getTotal()
     }, [items])
+
+    useEffect(() => {
+        const cartData = JSON.parse(localStorage.getItem('cartData'))
+        if(cartData){
+            setItems(cartData)
+        }
+    }, [])
+    useEffect(() => {
+        localStorage.setItem('cartData', JSON.stringify(items))
+    },[items])
 
     return(
         <CartContext.Provider value={{items, setItems, addItem, deleteAll, deleteItem, qtyChange, total,setTotal}} >
