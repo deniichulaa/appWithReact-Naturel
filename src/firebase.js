@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCQ84vVRflsHoi62Txd4OqycdDcQ6fHP1c",
-  authDomain: "tienda-naturel.firebaseapp.com",
-  projectId: "tienda-naturel",
-  storageBucket: "tienda-naturel.appspot.com",
-  messagingSenderId: "96704399697",
-  appId: "1:96704399697:web:d7d530a9f59cb25cac2b70"
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID
 };
 
 // Initialize Firebase

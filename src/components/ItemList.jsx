@@ -2,8 +2,7 @@
 import Item from "./Item";
 
 const ItemList = ({productsItemList}) => {
-    //let ProductArray = productsItemList.productItemlist
-    //console.log("🚀 ~ file: ItemList.jsx ~ line 10 ~ ItemList ~ ProductArray", ProductArray)
+console.log("🚀 ~ file: ItemList.jsx ~ line 5 ~ ItemList ~ productsItemList", productsItemList)
 
     const container = {
         padding: "5rem 2rem",

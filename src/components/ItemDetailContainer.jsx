@@ -13,38 +13,14 @@ const ItemDetailContainer = () => {
     const {id} = useParams();
     const [product, setProduct] = useState(null)
 
-   /*  useEffect(() => {
+    useEffect(() => {
         const getFromFirebase = async () => {
             const docRef = doc(db, "items", id)
             const docSnapshot = await getDoc(docRef)
             setProduct({id: docSnapshot.id, ...docSnapshot.data()})
         }
         getFromFirebase()
-    }, []); */
-
-    // ---------------------------- PRODUCTOS MELI ----------------------------------
-    const productDetail = (id) => {
-        return fetch(`https://api.mercadolibre.com/items/${id}`)
-            .then(data => data.json())
-    }
-    
-    const productDescription = (id) => {
-        return fetch(`https://api.mercadolibre.com/items/${id}/description`)
-            .then(data => data.json())
-    }
-
-    useEffect(() => {
-        let mounted = true
-        Promise.all([productDetail(id), productDescription(id)]).then(results => {
-            let item = results[0] 
-            item.description = results[1].plain_text
-
-            if(mounted){
-                setProduct(item)
-            }
-        })
-        return () => mounted=false
-    }, [id]); 
+    }, []); 
 
     return(
         <>
