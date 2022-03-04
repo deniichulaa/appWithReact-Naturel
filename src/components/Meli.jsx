@@ -1,34 +1,44 @@
-import {useState, useEffect} from 'react';
-import Loading from './Loading';
+import React, {useState, useEffect, memo} from 'react';
+
 import { Container } from 'react-bootstrap';
+
+import Loading from './Loading';
 import ItemListContainer from './ItemListContainer';
 
 const Meli = () => {
     const [apiProducts, setApiProducts] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const meliProducts = (category) => {
         return fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${category}`)
         .then(data => data.json())
     }
+    console.log("se renderizo meli")
   
     useEffect(() => {
         let mounted = true
         meliProducts("MLA1246").then(item => {
             if(mounted){
               setApiProducts(item.results)
+              
               setTimeout(() => {
-                <Loading/>
-              },3000)
+                setLoading(true)
+              },2000)
             }
         })
         return () => mounted = false
     }, []) 
 
     return (
-        <Container >
-          <ItemListContainer products={apiProducts}/>
+        <Container>
+         
+          {loading ? 
+            <ItemListContainer products={apiProducts}/>  
+            : <Loading />
+          }
+          
         </Container>
     );
 }
 
-export default Meli
+export default React.memo(Meli);

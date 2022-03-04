@@ -1,8 +1,11 @@
+import {useState, useContext} from "react";
+import {Link} from "react-router-dom";
+
 import { Row, Col, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import ItemCount from "./ItemCount"
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import { CartContext } from '../context/CartContext'; 
 
 const ItemDetail = ({product}) => {
 
@@ -12,7 +15,23 @@ const ItemDetail = ({product}) => {
     const [butonOnAdd, setButonOnAdd] = useState(true);
     const [qty, setQty] = useState(1); //estado del contador 
 
- 
+    const {addItem} = useContext(CartContext)
+
+    const onAdd = (qty, product) => {
+        setButonOnAdd(false);
+
+        const {thumbnail, title, price, id, initial_quantity} = product;
+        const productItem = {
+            id: id,
+            img: thumbnail,
+            name: title,
+            price: price, 
+            qty: qty,
+            initial_quantity: initial_quantity
+        };
+        
+        addItem(productItem);
+    }
     return(
         <>
             <Row style={{textAlign: "center"}}>
@@ -29,7 +48,10 @@ const ItemDetail = ({product}) => {
                     <p>stock: {initial_quantity}</p>
 
                     {butonOnAdd ? 
-                        <ItemCount product={product} qty={qty} setQty={setQty} setButonOnAdd={setButonOnAdd}/> 
+                        (<div>
+                            <ItemCount product={product} qty={qty} setQty={setQty}/> 
+                            <Button variant="secondary" onClick={() => onAdd(qty, product)} style={{marginTop:20}}>Agregar al Carrito</Button>
+                        </div>)
                         : ( <div>
                                 <Link to ={"/cart"}> <Button variant="secondary" >Finalizar compra</Button></Link>
                             </div>

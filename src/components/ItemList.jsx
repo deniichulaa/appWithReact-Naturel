@@ -1,3 +1,4 @@
+import React, {memo} from 'react';
 
 import Item from "./Item";
 
@@ -16,15 +17,14 @@ console.log("🚀 ~ file: ItemList.jsx ~ line 5 ~ ItemList ~ productsItemList", 
 
         <div style={container}>
             
-            { productsItemList ? 
-            (productsItemList.map((prod) => (
-                <Item key={prod.id} product={prod}/> 
-            )))
-            : null
+            { productsItemList !== undefined && 
+                productsItemList.map((prod) => (
+                    <Item key={prod.id} product={prod}/> 
+                ))
             }  
             
         </div> 
     ) 
 }
 
-export default ItemList 
+export default React.memo(ItemList) ;

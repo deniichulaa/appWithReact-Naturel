@@ -9,9 +9,7 @@ export const CartProvider = ({children}) => {
     const [total, setTotal] = useState(0);
 
     const addItem = (product) => { 
-        //console.log("🚀 ~ file: CartContext.jsx ~ line 11 ~ addItem ~ product", product)
         const {id} = product;
-        console.log("🚀 ~ file: CartContext.jsx ~ line 12 ~ addItem ~ id", id)
 
         const isInCart = items.every(item => {
             return item.id !== id
@@ -28,15 +26,20 @@ export const CartProvider = ({children}) => {
         setItems([])
     }
 
-    const qtyChange = () => {
-        console.log("cambio valor")
-    }
-
     const deleteItem = (id) => {
         const propId = id.id;
         const newItems = items.filter((prod) => {return prod.id !== propId});
         setItems(newItems) 
+    }
 
+    const changeItemQty = (id, changeQty) => {
+        const update = items.map((prod) => {
+            if(prod.id === id){
+                prod.qty = changeQty
+            }
+            return prod
+        })
+        setItems(update)
     }
 
     useEffect(() => {
@@ -60,7 +63,7 @@ export const CartProvider = ({children}) => {
     },[items])
 
     return(
-        <CartContext.Provider value={{items, setItems, addItem, deleteAll, deleteItem, qtyChange, total,setTotal}} >
+        <CartContext.Provider value={{items, setItems, addItem, deleteAll, deleteItem, total,setTotal, changeItemQty}} >
             {children}
         </CartContext.Provider>
     )

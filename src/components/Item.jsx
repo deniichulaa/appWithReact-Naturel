@@ -1,13 +1,11 @@
-/* import react from "react"; */
+import { useNavigate } from 'react-router-dom';
+
 import { Button, Card, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { useNavigate } from 'react-router-dom';
 
 const Item = ({product}) => {
 
-    console.log("en item ", product);
-    
     const {id, title, thumbnail, price } = product;
 
     const navigate = useNavigate()
@@ -21,9 +19,7 @@ const Item = ({product}) => {
     }
 
     return (
-
         <>
-
             <Card style={cardStyle}>
                 <Card.Img variant="top" src={thumbnail} style={{widht: 300}}/>
                 <Card.Body style={{textAlign:"center", fontFamily:"georgia"}}> 
@@ -35,7 +31,6 @@ const Item = ({product}) => {
                 </Card.Body>
             </Card>
         </>
-        
     )
 }
 

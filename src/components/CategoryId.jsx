@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom"
 
-
 const CategoryId = () => {
     const {id} = useParams();
 
+    
     return(
         <>
             <p>

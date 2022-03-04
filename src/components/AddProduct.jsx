@@ -1,11 +1,16 @@
-import { useState } from "react"
+import { useState } from "react";
+import {Link} from "react-router-dom";
+
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import {collection, addDoc} from "firebase/firestore"
 import { db } from "../firebase";
 import {getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const AddProduct = () => {
     const [image, setImage] = useState('');
+    const [success, setSuccess] = useState(false)
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -17,6 +22,7 @@ const AddProduct = () => {
         const category = event.target.elements.category.value;
 
         addtoFirebase(title,description,initial_quantity,price,sold_quantity,category);
+        setSuccess(true);
     }
 
     const addtoFirebase = async(title, description, initial_quantity, price, sold_quantity, category) => {
@@ -45,7 +51,24 @@ const AddProduct = () => {
         })
     }
 
+    const succesStyle = {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width:"100%",
+        height:"100%",
+        backgroundColor: "rgba(0,0,0,0.8)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    }
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     return(
+        <>
         <Container style={{marginTop:50}}>
             <Form onSubmit={onSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="title">
@@ -100,6 +123,15 @@ const AddProduct = () => {
                 <Button variant="secondary" type="submit" style={{marginTop:30}}>Agregar Producto</Button>
             </Form>
         </Container>
+        {success ?
+            (<div style={succesStyle}> 
+                <FontAwesomeIcon icon={faCheckCircle} style={{fontSize:80, color:'white', marginBottom: 100}}/>
+                <Button variant="outline-light" as={Link} to="/" style={{marginBottom: 20}}>Ir al inicio</Button>
+                <Button variant="outline-light" onClick={() => refreshPage()} >Agregar otro Producto</Button>
+            </div>)
+        : null 
+        }
+        </>
     )
 }
 

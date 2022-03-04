@@ -1,16 +1,20 @@
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Row, Table, Col, Button, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useContext, useState } from 'react';
+import {collection, addDoc} from "firebase/firestore";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import {db} from "../firebase";
+
 import { CartContext } from '../context/CartContext';
 import CartItem from './CartItem';
-import {collection, addDoc} from "firebase/firestore";
-import {db} from "../firebase"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LottieAnim from './LottieAnim';
 
 const Cart = () => {
     const [success, setSuccess] = useState(false);
-    const [orderId, setOrderId] = useState("")
-    const {items, deleteAll, total} = useContext(CartContext);
+    const {items, setItems, deleteAll, total} = useContext(CartContext);
     //console.log("en el carrito " , items)
 
     const checkout = () => {
@@ -21,11 +25,12 @@ const Cart = () => {
         const itemToBuy = items.map(item => {
             return {
                 id: item.id,
-                title: item.title,
+                title: item.name,
                 price: item.price,
                 qty: item.qty
             }
         })
+        
         const buyer = {
             name: "Denu",
             phone: "1521762389",
@@ -38,34 +43,33 @@ const Cart = () => {
             date: new Date()
         }
 
-        addDoc(collection(db, "orders"), order)
-        .then(doc => {
-            setOrderId(doc.id)
-            setSuccess(true)
-            console.log("todo correcto, el id del documento es ", doc.id)
-        })
-        .catch(err => {
-            console.log("algo salio mal ",err)
-        })
+        try {
+            const docRef = addDoc(collection(db, "orders"), order);
+            setSuccess(true);
+            setItems([]);
+        } catch (e) {
+            console.log("algo salio mal: ", e);
+        }
+
     }
-    
     const succesStyle = {
+        position: "absolute",
         top: 0,
         left: 0,
         width:"100%",
         height:"100%",
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(0,0,0,0.8)",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
-        alignItem: "center",
+        alignItems: "center",
     }
+    
     return(
         <>
-        <Container>
+        <Container >
             { items.length === 0 ?
-            
-                (<h3 style={{textAlign: "center", marginTop:80}}>Nada por acá </h3> )
-                
+                <LottieAnim />
                 : (
                     <div>
                         <Table striped bordered hover size="sm" style={{marginTop: 50, marginBottom:40}}>
@@ -80,7 +84,7 @@ const Cart = () => {
                             <tbody>
                     
                                 { items.map((prod) =>  
-                                <CartItem product={prod} key={prod.id}/>  
+                                    <CartItem product={prod} key={prod.id}/>  
                                 ) }
                             </tbody>
                         </Table>
@@ -98,16 +102,17 @@ const Cart = () => {
                 )
             }
 
-         
         </Container>
 
         {success ?
-            (<div style={succesStyle}> <FontAwesomeIcon icon="fa-solid fa-circle-check" /></div>)
+            (<div style={succesStyle}> 
+                <FontAwesomeIcon icon={faCheckCircle} style={{fontSize:80, color:'white'}}/>
+                <Button variant="outline-light" as={Link} to="/" style={{marginTop:100}}>Continuar Compras</Button>
+            </div>)
         : null 
         }
-        
         </>
-    )
+    );
 }
 
 export default Cart

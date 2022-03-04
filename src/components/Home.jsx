@@ -1,19 +1,20 @@
 import { Container } from 'react-bootstrap';
-import {useState, useEffect} from "react";
+import React, {useState, useEffect, memo} from "react";
 
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../firebase"
 
 import ItemListContainer from './ItemListContainer';
-//import Loading from './Loading';
+import Loading from './Loading';
 
 
-function Home() {
+const Home = memo(() => {
+  console.log("ESTOY EN EL HOME ")
 
   const prodArray = []
   const [prodList, setProdList] = useState()
+  const [loading, setLoading] = useState(false)
   
-
   useEffect(() => {
     const getFromFirebase = async () => {
 
@@ -50,18 +51,21 @@ function Home() {
     getFromFirebase()
     
     setProdList(prodArray)
+    setLoading(true)
     
   }, []); 
+  
 console.log("🚀 ~ file: Home.jsx ~ line 14 ~ Home ~ prodList", prodList)
 
   return (
     <Container >
-      
-      <ItemListContainer products={prodList}/>
-
+      {
+        prodList !== undefined &&
+        (loading ? <ItemListContainer products={prodList}/> : <Loading />)
+      }
     </Container>
   );
-}
+})
 
 export default Home;
 
