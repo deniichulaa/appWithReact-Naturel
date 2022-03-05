@@ -1,5 +1,4 @@
 
-import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 import NavBar from './components/NavBar';
@@ -11,6 +10,7 @@ import Cart from "./components/Cart";
 import { CartProvider } from './context/CartContext';
 import AddProduct from './components/AddProduct';
 import Meli from './components/Meli';
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,10 +27,9 @@ function App() {
             <Route path="/meli" element={<Meli/>} />
             <Route path="/contact"  element={<Contact/>} /> 
             <Route path="/" exact element={<Home/>} /> 
-
           </Route>
-          
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </CartProvider>
   );

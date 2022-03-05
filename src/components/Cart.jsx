@@ -63,11 +63,17 @@ const Cart = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        fontFamily: "georgia",
+    }
+    const information ={
+        color: "white", 
+        fontSize: 40,
+        marginBottom: 60,
     }
     
     return(
         <>
-        <Container >
+        <Container style={{fontFamily: "georgia"}}>
             { items.length === 0 ?
                 <LottieAnim />
                 : (
@@ -106,6 +112,7 @@ const Cart = () => {
 
         {success ?
             (<div style={succesStyle}> 
+                <p style={information}>Gracias por su Compra!</p>
                 <FontAwesomeIcon icon={faCheckCircle} style={{fontSize:80, color:'white'}}/>
                 <Button variant="outline-light" as={Link} to="/" style={{marginTop:100}}>Continuar Compras</Button>
             </div>)

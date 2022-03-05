@@ -24,7 +24,7 @@ const CartWidget = () => {
         borderRadius: "50%",
         border: "1px solid #d1bdc4",
         color: "white",
-        backgroundColor: "#9a607b",
+        backgroundColor: "#755353",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -35,7 +35,7 @@ const CartWidget = () => {
     return(
         
         <div style={iconStyle}>
-            <Link to={"/cart"} style={{color:"#9a607b"}}> <FontAwesomeIcon icon={faShoppingCart} pull="right" style={{height: 35}}/> </Link>
+            <Link to={"/cart"} style={{color:"#755353"}}> <FontAwesomeIcon icon={faShoppingCart} pull="right" style={{height: 35}}/> </Link>
             <span className="item_total" style={spanStyle}>{items.length}</span>
         
         </div>

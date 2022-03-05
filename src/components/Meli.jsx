@@ -1,4 +1,4 @@
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { Container } from 'react-bootstrap';
 
@@ -41,4 +41,4 @@ const Meli = () => {
     );
 }
 
-export default React.memo(Meli);
+export default Meli;

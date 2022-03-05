@@ -34,7 +34,7 @@ const ItemDetail = ({product}) => {
     }
     return(
         <>
-            <Row style={{textAlign: "center"}}>
+            <Row style={{textAlign: "center", fontFamily: "georgia"}}>
                 <Col>
                     <img src={thumbnail} alt="Imagen del Producto" style={{height:300}} />
                 </Col>
@@ -62,7 +62,7 @@ const ItemDetail = ({product}) => {
                
             </Row>
             <Row>
-                <div style={{marginTop: 80}}>
+                <div style={{marginTop: 80, fontFamily: "georgia"}}>
                     <h3>Descripción del producto</h3>
                     <div>
                         {description}

@@ -62,6 +62,12 @@ const AddProduct = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        fontFamily: "georgia",
+    }
+    const information ={
+        color: "white", 
+        fontSize: 40,
+        marginBottom: 60,
     }
     const refreshPage = () => {
         window.location.reload(false);
@@ -125,6 +131,7 @@ const AddProduct = () => {
         </Container>
         {success ?
             (<div style={succesStyle}> 
+                <p style={information}>Producto Agregado Correctamente!</p>
                 <FontAwesomeIcon icon={faCheckCircle} style={{fontSize:80, color:'white', marginBottom: 100}}/>
                 <Button variant="outline-light" as={Link} to="/" style={{marginBottom: 20}}>Ir al inicio</Button>
                 <Button variant="outline-light" onClick={() => refreshPage()} >Agregar otro Producto</Button>
